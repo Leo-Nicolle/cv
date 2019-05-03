@@ -1,0 +1,126 @@
+:root {
+  --first-color: #76e18e;
+  --second-color: #1ca3bd;
+  --third-color: #ffb976;
+  --black-1: #17180b;
+  --white-1: #fafafa;
+  --white-2: #ffffff;
+  --white-3: #ddffdd;
+  --blue-1: #00b7ce;
+  --blue-2: #13c8da;
+  --grey-1: #eaf0eb;
+}
+document {
+  @font-face {
+    font-family: "antique_olive_t_otbold";
+    src: url("~/assets/font/antiqueolivetot-bold-webfont.woff") format("woff");
+    src: url("~/assets/font/antiqueolivetot-bold-webfont.woff2") format("woff2");
+    src: url("~/assets/font/icons.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+  }
+}
+
+body {
+  color: var(--black-1);
+  background-color: var(--grey-1);
+  font-family: "Source Sans Pro", sans-serif;
+  margin: 0 30px;
+  letter-spacing: 0.2px;
+  font-size: 16px;
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--black-1);
+  font-family: "antique_olive_t_otbold", serif;
+  font-weight: bold;
+  margin: 0;
+  letter-spacing: 0.8px;
+  line-height: 48px;
+  text-align: left;
+}
+h1 {
+  font-size: 28px;
+}
+h2 {
+  padding-right: 26px;
+  border-bottom: solid 1px var(--blue-1);
+}
+.h2-container {
+  display: flex;
+}
+p {
+  font-family: "Helvetica_Roman", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+}
+ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.icon-list-container > ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+.icon-list-container > ul > li {
+  cursor: pointer;
+  padding-right: 16px;
+  padding: 6px 0px 6px 0px;
+  border-radius: 16px;
+  min-width: 150px;
+}
+
+.icon-list-container > ul > li:hover {
+  background-color: var(--blue-2);
+}
+.icon-title {
+  text-align: center;
+}
+i {
+  font-size: 56px;
+}
+
+@media only screen and (max-width: 768px) {
+  body {
+    font-size: 12px;
+  }
+  i {
+    font-size: 28px;
+  }
+  h1,
+  h2,
+  h3 {
+    letter-spacing: 0.4px;
+    /*line-height: unset;*/
+  }
+  h1 {
+    font-size: 1.8em;
+  }
+  h2 {
+    font-size: 1.5em;
+  }
+  h3 {
+    font-size: 1.2em;
+  }
+  p {
+    font-family: "Helvetica_Roman", sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    margin: 10px 10px;
+  }
+  .icon-list-container > ul > li {
+    min-width: 100px;
+  }
+}

@@ -5,11 +5,18 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "build-svg": "icon-font-generator public/svg/*.svg -o public/font",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "core-js": "^2.6.5",
-    "vue": "^2.6.10"
+    "icon-font-generator": "^2.1.10",
+    "node-sass": "^4.12.0",
+    "sass-loader": "^7.1.0",
+    "tween.js": "^16.6.0",
+    "vue": "^2.6.10",
+    "vue-carousel": "^0.18.0",
+    "vue-router": "^3.0.3"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.7.0",

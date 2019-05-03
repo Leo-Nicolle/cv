@@ -1,0 +1,75 @@
+@font-face {
+    font-family: "icons";
+    src: url("./icons.eot?17127f0d495211c3ffa19cb001ed874c?#iefix") format("embedded-opentype"),
+url("./icons.woff2?17127f0d495211c3ffa19cb001ed874c") format("woff2"),
+url("./icons.woff?17127f0d495211c3ffa19cb001ed874c") format("woff"),
+url("./icons.ttf?17127f0d495211c3ffa19cb001ed874c") format("truetype"),
+url("./icons.svg?17127f0d495211c3ffa19cb001ed874c#icons") format("svg");
+}
+
+i {
+    line-height: 1;
+}
+
+i[class^="icon-"]:before, i[class*=" icon-"]:before {
+    font-family: icons !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-bruit:before {
+    content: "\f101";
+}
+.icon-carabino:before {
+    content: "\f102";
+}
+.icon-cemurmure:before {
+    content: "\f103";
+}
+.icon-dynamobile:before {
+    content: "\f104";
+}
+.icon-fractal:before {
+    content: "\f105";
+}
+.icon-home:before {
+    content: "\f106";
+}
+.icon-homer:before {
+    content: "\f107";
+}
+.icon-homework:before {
+    content: "\f108";
+}
+.icon-homework2:before {
+    content: "\f109";
+}
+.icon-left-arrow:before {
+    content: "\f10a";
+}
+.icon-liris:before {
+    content: "\f10b";
+}
+.icon-mountains:before {
+    content: "\f10c";
+}
+.icon-ombres:before {
+    content: "\f10d";
+}
+.icon-poker:before {
+    content: "\f10e";
+}
+.icon-right-arrow:before {
+    content: "\f10f";
+}
+.icon-theater:before {
+    content: "\f110";
+}
+.icon-wanadev:before {
+    content: "\f111";
+}
