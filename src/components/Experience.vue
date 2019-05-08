@@ -4,7 +4,7 @@
       <div class = "h2-container">
         <h2>Experience</h2>
       </div>
-    </div> 
+    </div>
     <ul>
        <li v-for="experience in experiences">
          <h3 class="experience-title">
@@ -12,7 +12,7 @@
          </h3>
          <div class= "project-container">
            <p class="experience-description" v-html= " experience.description"> </p>
-           <div class = "icon-list-container"> 
+           <div class = "icon-list-container">
              <ul>
                 <li v-for="project in experience.projects" @click= "onProjectClick({url:project.link.url})">
                      <div>
@@ -29,11 +29,11 @@
       <div class = "h2-container">
         <h2>Education</h2>
       </div>
-    </div> 
+    </div>
     <ul class= "education">
        <li v-for="education in educations">
          <h3 class="education-title">
-          <span class= "year">{{ education.year}} -- </span> 
+          <span class= "year">{{ education.year}} -- </span>
           <span class= "title">{{ education.title}}</span>
          </h3>
        </li>
@@ -70,7 +70,15 @@ export default {
       ],
       experiences: [
         {
-          year: `2017`,
+          year: `2019`,
+          title: `Creative Developer at Displayground`,
+          time: `3 months`,
+          description: `At displayground I discovered emergency, quick deliveries, undecised clients and reactivity.<br/>
+           I was working mainly with THREE, I integrated a <a href='https://github.com/Leo-Nicolle/image-background-removal'>Neural Net</a> in a project
+           and made some usual webdesign.<br/>`
+         },
+        {
+          year: `2018`,
           title: `WebGL developper at Wanadev`,
           time: `2 years`,
           description: `The main project that I was involved in is called Kazaplan, a big WebGL app, as well as some other little side-projects related to 3D.<br/>
@@ -85,7 +93,7 @@ export default {
                 title: `Wanadev page`,
                 url: `https://www.wanadev.fr/`,
               },
-            },  
+            },
             {
               topic: `Kazaplan`,
               icon:"icon-home",
@@ -103,7 +111,7 @@ export default {
               },
             },
           ],
-          image: `assts/placeholder.jpg`,
+          image: `assets/placeholder.jpg`,
         },
         {
           year: `2016`,
@@ -120,7 +128,7 @@ This work led to a publication at VISAPP 2017.`,
                 title: `LIRIS page`,
                 url: `https://liris.cnrs.fr/`,
               },
-            },  
+            },
             {
               topic: `Publication`,
               icon:"icon-mountains",
@@ -132,8 +140,8 @@ This work led to a publication at VISAPP 2017.`,
           ],
           image: `assets/experience/internship.png`,
         },
-      ], 
-    } 
+      ],
+    }
   },
 };
 
@@ -198,8 +206,8 @@ li{
           ],
           image: `assets/experience/internship.png`,
         },
-      ], 
-    } 
+      ],
+    }
   },
 };
 
