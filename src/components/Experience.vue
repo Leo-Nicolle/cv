@@ -74,8 +74,8 @@ export default {
           title: `Creative Developer at Displayground`,
           time: `3 months`,
           description: `At displayground I discovered emergency, quick deliveries, undecised clients and reactivity.<br/>
-           I was working mainly with THREE, I integrated a <a href='https://github.com/Leo-Nicolle/image-background-removal'>Neural Net</a> in a project
-           and made some usual webdesign.<br/>`
+           I was working mainly with THREE, I integrated a <a target='_blank' href='https://github.com/Leo-Nicolle/image-background-removal'>Neural Net</a> in a project
+           and made a <a target='_blank' href='https://configurator.themonkeyscobbler.com.au/'>car configurator</a>.<br/>`
          },
         {
           year: `2018`,
