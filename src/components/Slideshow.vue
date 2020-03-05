@@ -63,8 +63,14 @@ export default {
   },
   watch: {
     content: function(newValue, oldValue) {
-      if (newValue.folding) {
-        this.tweenHeight(1, 0);
+      if (newValue.folding && !oldValue.folding) {
+        this.tweenHeight(1, 0, () => {
+          this.maxHeight = 0;
+          this.opacity = 1;
+          this.visible = false;
+          this.loadedImages = 0;
+          this.content = null;
+        });
         return;
       }
       if (this.visible) {

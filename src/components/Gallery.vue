@@ -23,7 +23,7 @@ export default {
   methods: {
     onItemClick(item) {
       if (this.selectedItem === item) {
-        this.selectedItem = { ...item, folding: true };
+        this.selectedItem = { ...item, folding: Date.now() };
       } else {
         this.selectedItem = item;
       }
