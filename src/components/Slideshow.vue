@@ -1,8 +1,8 @@
 <template>
   <div
+    v-if="content"
     class="container slideshow"
     :style="{ opacity, 'max-height': height }"
-    v-if="content"
   >
     <div class="slideshow-image-container" v-on:resize="handleResize($event)">
       <img
@@ -12,7 +12,7 @@
         @load="loadedImages += 1"
       />
 
-      <div v-else class="slideshow-container">
+      <div class="slideshow-container">
         <i
           class="icon-left-arrow icon-slideshow"
           @click="onPrevClick({ array: content.images })"
@@ -60,6 +60,10 @@ export default {
   },
   watch: {
     content: function(newValue, oldValue) {
+      if (newValue.folding) {
+        this.tweenHeight(1, 0);
+        return;
+      }
       if (this.visible) {
         this.tweenOpacity(0, 1).start();
       }
@@ -79,15 +83,13 @@ export default {
     visible: function(newValue, oldValue) {
       //hiding
       if (oldValue && !newValue) {
-        console.log("ici", this.$el.scrollHeight);
-        this.tweenHeight(1, 0, () => console.log("done"));
+        this.tweenHeight(1, 0);
       }
       // showing
       if (!oldValue && newValue) {
         this.maxHeight = this.$el.scrollHeight;
-        console.log("maxHeight", this.maxHeight);
         this.currentIndex = 0;
-        this.tweenHeight(0, 1, () => console.log("done"));
+        this.tweenHeight(0, 1);
       }
     }
   },
@@ -110,14 +112,12 @@ export default {
           this.opacity = time.t;
         });
     },
-    tweenHeight(start, end, done) {
+    tweenHeight(start, end, done = () => {}) {
       const time = { t: start };
       new TWEEN.Tween(time)
         .to({ t: end }, 3000)
         .easing(TWEEN.Easing.Quadratic.Out)
         .onUpdate(() => {
-          const image = this.$el.querySelector("img");
-          const text = this.$el.children[1];
           this.height = `${Math.round(time.t * this.maxHeight)}px`;
         })
         .start()

@@ -14,7 +14,6 @@
     <slideshow :content="selectedItem"></slideshow>
   </div>
 </template>
-
 <script>
 import Slideshow from "./Slideshow.vue";
 
@@ -22,7 +21,11 @@ export default {
   name: "Gallery",
   methods: {
     onItemClick(item) {
-      this.selectedItem = item;
+      if (this.selectedItem === item) {
+        this.selectedItem = { ...item, folding: true };
+      } else {
+        this.selectedItem = item;
+      }
     }
   },
   data() {
