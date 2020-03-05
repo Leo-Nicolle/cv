@@ -60,14 +60,15 @@ a {
 }
 #flag-container {
   display: flex;
+  align-items: center;
   max-width: 24px;
 }
 #flag-container > img {
   width: 100%;
-  height: auto;
+  height: 32px;
   margin: 0 2px;
   transform-origin: center;
-  transform: translateY(25%);
+  transform: translateY(calc(25% + 7px));
   cursor: pointer;
 }
 

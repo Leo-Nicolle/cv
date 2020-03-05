@@ -34,7 +34,6 @@ export default {
   methods: {
     onTranslate(language) {
       this.language = language;
-      console.log("translate", language);
     }
   }
 };
