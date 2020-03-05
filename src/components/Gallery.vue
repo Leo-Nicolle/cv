@@ -11,7 +11,7 @@
         </div>
       </li>
     </ul>
-    <slideshow :content="selectedItem"></slideshow>
+    <slideshow :content="selectedItem" :language="language"></slideshow>
   </div>
 </template>
 <script>
@@ -19,6 +19,7 @@ import Slideshow from "./Slideshow.vue";
 
 export default {
   name: "Gallery",
+  props: ["language"],
   methods: {
     onItemClick(item) {
       if (this.selectedItem === item) {

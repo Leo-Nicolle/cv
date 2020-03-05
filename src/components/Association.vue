@@ -4,6 +4,7 @@ import Gallery from "./Gallery.vue";
 export default {
   name: "Association",
   extends: Gallery,
+  props: ["language"],
   data() {
     return {
       title: "Associative Involvment",

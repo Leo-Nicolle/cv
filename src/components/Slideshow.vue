@@ -33,7 +33,10 @@
         ></i>
       </div>
     </div>
-    <p class="project-description" v-html="content.description" />
+    <p
+      class="project-description"
+      v-html="getTranslated(content, 'description')"
+    />
   </div>
 </template>
 
@@ -47,7 +50,7 @@ requestAnimationFrame(animate);
 const TWEEN = require("tween.js");
 export default {
   name: "Slideshow",
-  props: ["content"],
+  props: ["content", "language"],
   data() {
     return {
       visible: false,
