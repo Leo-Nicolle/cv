@@ -1,18 +1,18 @@
 <template>
   <div>
     <div class="h2-container">
-      <h2>Skills</h2>
+      <h2>{{ getTranslated(["Skills", "Compétences"]) }}</h2>
     </div>
     <ul class="skill-ul">
       <li class="skill-li" v-for="skill in skills">
         <h3 class="skill-title">
-          <span>{{ skill.title }}</span>
+          <span>{{ getTranslated(skill, "title") }}</span>
         </h3>
         <ul class="subskill-ul">
           <li class="subskill-li" v-for="subskill in skill.subskills">
             <div class="status-container">
               <div class="status" :style="{ width: subskill.percent }">
-                <p>{{ subskill.title }}</p>
+                <p>{{ getTranslated(subskill, "title") }}</p>
               </div>
             </div>
           </li>
@@ -57,32 +57,19 @@ export default {
               percent: "95%"
             },
             {
-              title: "Webpack",
-              percent: "90%"
-            },
-            {
               title: "Meteor",
-              percent: "87%"
-            }
-          ]
-        },
-        {
-          title: "Maths",
-          subskills: [
-            {
-              title: "Matrix cooking",
               percent: "90%"
             },
             {
-              title: "Probabilities",
-              percent: "85%"
+              title: "Webpack",
+              percent: "87%"
             },
             {
-              title: "Linear algebra",
-              percent: "78%"
+              title: "Less",
+              percent: "80%"
             },
             {
-              title: "Graphs theory",
+              title: "Node",
               percent: "75%"
             }
           ]
@@ -92,10 +79,12 @@ export default {
           subskills: [
             {
               title: "Image Recognition",
+              title_french: "Reconnaissance d'Image",
               percent: "80%"
             },
             {
               title: "Image processing",
+              title_french: "Traitement d'Image",
               percent: "78%"
             },
             {

@@ -1,83 +1,72 @@
 <template>
-  <div class = "menu-container">
-    SAljhiotgfjddom
-    <ul class = "item-ul">
-       <li v-for="item in items">
-        <div class = "item-container">
-          <span class="item-title" v-html= "item.title"> </span> 
-           <span class = "item-circle"> 
-           </span>
-          
+  <div class="menu-container">
+    <ul class="item-ul">
+      <li v-for="item in items">
+        <div class="item-container">
+          <span class="item-title" v-html="item.title"> </span>
+          <span class="item-circle"> </span>
         </div>
-       </li>
+      </li>
     </ul>
   </div>
 </template>
 
 <script>
-
 export default {
   name: "Menu",
 
   methods: {
-
-
     // onProjectClick({url}){
     //   win = window.open(url, '_blank');
     // },
   },
 
-  data () {
+  data() {
     return {
       items: [
         {
-          title:"Introduction",
+          title: "Introduction"
         },
         {
-          title:"Experience",
+          title: "Experience"
         },
         {
-          title:"Skill",
+          title: "Skill"
         },
         {
-          title:"Project",
+          title: "Project"
         },
         {
-          title:"Association",
-        },
-
+          title: "Association"
+        }
       ]
-
-    }
-  },
+    };
+  }
 };
-
 </script>
 
 <style lang="scss" scoped>
-
-.item-ul{
+.item-ul {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
 }
 
-.item-ul > li{
+.item-ul > li {
   margin-bottom: 10px;
 }
 
-.menu-container{
+.menu-container {
   position: absolute;
   right: 24px;
 }
 
-.item-container{
+.item-container {
   display: flex;
   align-items: center;
-
 }
 
-.item-circle{
+.item-circle {
   height: 30px;
   width: 30px;
   border-radius: 50%;
@@ -88,13 +77,12 @@ export default {
 }
 
 .item-circle:hover,
-.item-circle-selected{
+.item-circle-selected {
   box-shadow: 0 3px 3px rgba(0, 0, 0, 0.5) inset;
-  background-color: #9CA19D;
+  background-color: #9ca19d;
 }
 
-
-.item-circle:after{
+.item-circle:after {
   content: "";
   height: 20%;
   width: 20%;
@@ -107,10 +95,7 @@ export default {
   display: inline-block;
 }
 
-
 .item-circle:hover:after {
   background-color: #444444;
 }
-
-
 </style>
