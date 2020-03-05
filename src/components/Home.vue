@@ -2,7 +2,7 @@
   <div>
     <link rel="stylesheet" type="text/css" href="//font/icons.css" />
     <link rel="stylesheet" type="text/css" href="//style.css" />
-    <intro @translate-to="onTranslate"></intro>
+    <intro @translate-to="onTranslate" :language="language"></intro>
     <experience :language="language"></experience>
     <skill :language="language"></skill>
     <project :language="language"></project>

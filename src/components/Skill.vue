@@ -25,6 +25,7 @@
 <script>
 export default {
   name: "Skill",
+  props: ["language"],
   data() {
     return {
       skills: [
@@ -41,6 +42,7 @@ export default {
             },
             {
               title: "Procedural",
+              title_french: "Procédural",
               percent: "85%"
             },
             {

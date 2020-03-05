@@ -1,7 +1,7 @@
 <template>
   <div class="icon-list-container">
     <div class="h2-container">
-      <h2>{{ title }}</h2>
+      <h2>{{ getTranslated(this.$data, "title") }}</h2>
     </div>
     <ul>
       <li v-for="item in items">

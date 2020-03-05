@@ -12,13 +12,21 @@
         </div>
       </div>
     </div>
-    <p id="subtitle">Computer Vision, 3D Developer</p>
+    <p id="subtitle">
+      {{
+        getTranslated([
+          "Computer Vision, 3D Developer",
+          "Développeur 3D, Vision par Ordinateur"
+        ])
+      }}
+    </p>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Intro"
+  name: "Intro",
+  props: ["language"]
 };
 </script>
 

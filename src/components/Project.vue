@@ -8,8 +8,7 @@ export default {
   data() {
     return {
       title: "Personal Projects",
-      ulgallery: "project",
-      slideshowid: "project-slideshow",
+      title: "Projets Personels",
       items: [
         {
           title: "H.O.M.E.R",

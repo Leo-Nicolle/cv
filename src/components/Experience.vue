@@ -27,7 +27,7 @@
     </ul>
      <div class = "h2-container">
       <div class = "h2-container">
-        <h2>Education</h2>
+        <h2>{{getTranslated(['Education','Éducation'])}}</h2>
       </div>
     </div>
     <ul class= "education">
