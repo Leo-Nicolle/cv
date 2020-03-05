@@ -1,42 +1,41 @@
 <template>
-  <div>
-    <transition @enter="enterEl" @leave="leaveEl" :css="false">
-      <div class="container" :id="slideshowid" v-if="visible">
-        <div
-          class="slideshow-image-container"
-          v-on:resize="handleResize($event)"
-        >
-          <img
-            v-if="slideshow.image"
-            class="image-slideshow"
-            v-bind:src="slideshow.image"
-          />
+  <div
+    class="container slideshow"
+    :style="{ display: visible ? '' : 'none', opacity, height }"
+    v-if="content"
+  >
+    <div class="slideshow-image-container" v-on:resize="handleResize($event)">
+      <img
+        v-if="content.image"
+        class="image-slideshow"
+        v-bind:src="content.image"
+        @load="loadedImages += 1"
+      />
 
-          <div v-else class="slideshow-container">
-            <i
-              class="icon-left-arrow icon-slideshow"
-              @click="onPrevClick({ array: slideshow.content })"
-            ></i>
-            <ul class="ul-slideshow">
-              <li v-for="(content, index) in slideshow.content" :index="index">
-                <img
-                  class="image-slideshow"
-                  v-bind:src="content"
-                  v-if="isVisible(index)"
-                />
-              </li>
-            </ul>
-            <i
-              class="icon-right-arrow icon-slideshow"
-              @click="onNextClick({ array: slideshow.content })"
-            ></i>
-          </div>
-        </div>
-        <div class="project-description">
-          <p v-html="slideshow.description"></p>
-        </div>
+      <div v-else class="slideshow-container">
+        <i
+          class="icon-left-arrow icon-slideshow"
+          @click="onPrevClick({ array: content.images })"
+        ></i>
+        <ul class="ul-slideshow">
+          <li v-for="(image, index) in content.images" :index="index">
+            <img
+              class="image-slideshow"
+              :src="image"
+              :style="isVisible(index)"
+              @load="loadedImages += 1"
+            />
+          </li>
+        </ul>
+        <i
+          class="icon-right-arrow icon-slideshow"
+          @click="onNextClick({ array: content.images })"
+        ></i>
       </div>
-    </transition>
+    </div>
+    <div class="project-description">
+      <p v-html="content.description"></p>
+    </div>
   </div>
 </template>
 
@@ -50,27 +49,54 @@ requestAnimationFrame(animate);
 const TWEEN = require("tween.js");
 export default {
   name: "Slideshow",
+  props: ["content"],
   data() {
     return {
       visible: false,
+      opacity: 1,
+      height: "0px",
+      loadedImages: 0,
       currentIndex: 0,
-      change: false,
-      ratio: { height: 0, opacity: 1, scrollDiff: 0, opacity: 1 },
-      slideshow: {},
-      slideshowid: ""
+      maxHeight: 245
     };
   },
-
+  watch: {
+    content: function(newValue, oldValue) {
+      if (this.visible) {
+        this.tweeningOpacity = this.tweenOpacity(1, 0).start();
+      }
+      this.loadedImages = 0;
+    },
+    loadedImages: function(newValue) {
+      const total = this.content
+        ? this.content.image
+          ? 1
+          : this.content.images.length
+        : Infinity;
+      if (newValue !== total) {
+        return;
+      }
+      if (this.tweeningOpacity) {
+        this.tweeningOpacity.chain(this.tweenOpacity(0, 1));
+      } else {
+        this.visible = this.visible || newValue === total;
+      }
+    },
+    visible: function(newValue, oldValue) {
+      //hiding
+      if (oldValue && !newValue) {
+        this.tweenHeight(1, 0, () => console.log("done"));
+      }
+      // showing
+      if (!oldValue && newValue) {
+        this.currentIndex = 0;
+        this.tweenHeight(0, 1, () => console.log("done"));
+      }
+    }
+  },
   methods: {
-    enterEl(el, done) {
-      this.currentIndex = 0;
-      this.tweenHeight(0, 1, el, done);
-    },
-    leaveEl(el, done) {
-      this.tweenHeight(1, 0, el, done);
-    },
     isVisible(index) {
-      return this.currentIndex == index;
+      return { display: this.currentIndex == index ? "" : "none" };
     },
     onPrevClick({ array }) {
       this.currentIndex = (this.currentIndex + 1) % array.length;
@@ -78,75 +104,27 @@ export default {
     onNextClick({ array }) {
       this.currentIndex = (this.currentIndex + 1) % array.length;
     },
-
-    tweenOpacity() {
-      this.change = true;
-      this.ratio.opacity = 1;
-      this.ratio.tweenOut = true;
-      const tweenOut = new TWEEN.Tween(this.ratio)
-        .to({ opacity: 0 }, 800)
+    tweenOpacity(start, end) {
+      const time = { t: start };
+      return new TWEEN.Tween(time)
+        .to({ t: end }, 800)
         .easing(TWEEN.Easing.Quadratic.Out)
-        .onUpdate(this.computeSlideshowHeightOpacity)
-        .onComplete(() => {
-          this.visible = false;
-          this.visible = true;
-          this.ratio.tweenOut = false;
+        .onUpdate(({ t }) => {
+          this.opacity = time.t;
         });
-      const tweenIn = new TWEEN.Tween(this.ratio)
-        .to({ opacity: 1 }, 600)
-        .easing(TWEEN.Easing.Quadratic.Out)
-        .onUpdate(this.computeSlideshowHeightOpacity)
-        .onComplete(() => {
-          this.change = false;
-        });
-
-      tweenOut.chain(tweenIn).start();
     },
-
-    tweenHeight(start, end, el, done) {
-      this.ratio.element = el;
-      this.ratio.height = start;
-      new TWEEN.Tween(this.ratio)
-        .to({ height: end }, 3000)
+    tweenHeight(start, end, done) {
+      new TWEEN.Tween({ t: start })
+        .to({ t: end }, 3000)
         .easing(TWEEN.Easing.Quadratic.Out)
         .onUpdate(this.computeSlideshowHeight)
         .start()
         .onComplete(done);
     },
-    computeSlideshowHeight() {
-      const image = this.ratio.element.firstChild.firstChild;
-      const text = this.ratio.element.children[1];
-      const offset =
-        image.offsetTop + image.offsetHeight - 1 < text.offsetTop
-          ? text.offsetHeight
-          : 18;
-      this.ratio.element.style.setProperty(
-        "height",
-        Math.round(
-          this.ratio.height *
-            (this.ratio.element.firstChild.firstChild.offsetWidth / 1.777 +
-              offset)
-        ) + "px"
-      );
-    },
-    computeSlideshowHeightOpacity() {
-      const opacityElement = document.getElementById(this.slideshowid);
-      opacityElement.style.setProperty("opacity", this.ratio.opacity);
-
-      if (this.ratio.tweenOut) return;
-      const image = this.ratio.element.firstChild.firstChild;
-      const text = this.ratio.element.children[1];
-      const diff =
-        image.offsetTop + image.offsetHeight - 1 < text.offsetTop
-          ? text.offsetHeight
-          : 0;
-      this.ratio.element.style.setProperty(
-        "height",
-        Math.round(
-          this.ratio.opacity * diff +
-            this.ratio.element.firstChild.firstChild.offsetWidth / 1.777
-        ) + "px"
-      );
+    computeSlideshowHeight(t) {
+      const image = this.$el.querySelector("img");
+      const text = this.$el.children[1];
+      this.height = `${Math.round(t * this.maxHeight)}px`;
     }
   }
 };
@@ -166,7 +144,7 @@ export default {
   max-width: 60%;
   min-width: 60%;
   margin-left: 32px;
-  margin-top: 16px;
+  margin-top: 0;
 }
 .slideshow-container {
   display: flex;

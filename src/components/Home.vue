@@ -3,10 +3,10 @@
     <!-- <link rel="stylesheet" type="text/css" href="//font/icons.css"> -->
     <!-- <link rel="stylesheet" type="text/css" href="//style.css"> -->
     <intro @translate-to="onTranslate"></intro>
-    <experience :language="language"></experience>
-    <skill :language="language"></skill>
+    <!-- <experience :language="language"></experience> -->
+    <!-- <skill :language="language"></skill> -->
     <project :language="language"></project>
-    <association :language="language"></association>
+    <!-- <association :language="language"></association> -->
   </div>
 </template>
 
