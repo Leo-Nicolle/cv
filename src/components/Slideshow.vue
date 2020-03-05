@@ -1,7 +1,7 @@
 <template>
   <div
     class="container slideshow"
-    :style="{ display: visible ? '' : 'none', opacity, height }"
+    :style="{ opacity, 'max-height': height }"
     v-if="content"
   >
     <div class="slideshow-image-container" v-on:resize="handleResize($event)">
@@ -33,9 +33,7 @@
         ></i>
       </div>
     </div>
-    <div class="project-description">
-      <p v-html="content.description"></p>
-    </div>
+    <p class="project-description" v-html="content.description" />
   </div>
 </template>
 
@@ -57,13 +55,13 @@ export default {
       height: "0px",
       loadedImages: 0,
       currentIndex: 0,
-      maxHeight: 245
+      maxHeight: 0
     };
   },
   watch: {
     content: function(newValue, oldValue) {
       if (this.visible) {
-        this.tweeningOpacity = this.tweenOpacity(1, 0).start();
+        this.tweenOpacity(0, 1).start();
       }
       this.loadedImages = 0;
     },
@@ -76,19 +74,18 @@ export default {
       if (newValue !== total) {
         return;
       }
-      if (this.tweeningOpacity) {
-        this.tweeningOpacity.chain(this.tweenOpacity(0, 1));
-      } else {
-        this.visible = this.visible || newValue === total;
-      }
+      this.visible = this.visible || newValue === total;
     },
     visible: function(newValue, oldValue) {
       //hiding
       if (oldValue && !newValue) {
+        console.log("ici", this.$el.scrollHeight);
         this.tweenHeight(1, 0, () => console.log("done"));
       }
       // showing
       if (!oldValue && newValue) {
+        this.maxHeight = this.$el.scrollHeight;
+        console.log("maxHeight", this.maxHeight);
         this.currentIndex = 0;
         this.tweenHeight(0, 1, () => console.log("done"));
       }
@@ -114,17 +111,17 @@ export default {
         });
     },
     tweenHeight(start, end, done) {
-      new TWEEN.Tween({ t: start })
+      const time = { t: start };
+      new TWEEN.Tween(time)
         .to({ t: end }, 3000)
         .easing(TWEEN.Easing.Quadratic.Out)
-        .onUpdate(this.computeSlideshowHeight)
+        .onUpdate(() => {
+          const image = this.$el.querySelector("img");
+          const text = this.$el.children[1];
+          this.height = `${Math.round(time.t * this.maxHeight)}px`;
+        })
         .start()
         .onComplete(done);
-    },
-    computeSlideshowHeight(t) {
-      const image = this.$el.querySelector("img");
-      const text = this.$el.children[1];
-      this.height = `${Math.round(t * this.maxHeight)}px`;
     }
   }
 };
